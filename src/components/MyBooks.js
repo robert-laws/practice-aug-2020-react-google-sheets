@@ -4,7 +4,7 @@ import { Bar } from 'react-chartjs-2';
 
 const MyBooks = () => {
   const booksContext = useContext(BooksContext);
-  const { books, getBooks } = booksContext;
+  const { books, filteredBooks, getBooks, getBooksByRating } = booksContext;
 
   useEffect(() => {
     getBooks();
@@ -13,11 +13,16 @@ const MyBooks = () => {
 
   const [labels, setLabels] = useState([]);
   const [values, setValues] = useState([]);
+  const [myRating, setMyRating] = useState(0);
 
   useEffect(() => {
-    processLabels(books);
-    processValues(books);
-  }, [books]);
+    processLabels(filteredBooks);
+    processValues(filteredBooks);
+  }, [filteredBooks]);
+
+  useEffect(() => {
+    getBooksByRating(myRating);
+  }, [myRating]);
 
   const processLabels = (bookData) => {
     const myLabels = bookData.map((book) => {
@@ -31,6 +36,11 @@ const MyBooks = () => {
       return book.rating;
     });
     setValues(myValues);
+  };
+
+  const handleChange = (event) => {
+    const rating = event.target.value;
+    setMyRating(rating);
   };
 
   const data = {
@@ -60,7 +70,7 @@ const MyBooks = () => {
     <div>
       <h3>Book List</h3>
       <ul>
-        {books.map((book) => (
+        {filteredBooks.map((book) => (
           <li key={book.title}>
             {book.title} ({book.year}) - Rating {book.rating}
           </li>
@@ -68,6 +78,19 @@ const MyBooks = () => {
       </ul>
       <hr />
       <h3>Book Ratings</h3>
+      <p>Filter by Min Rating</p>
+      <select name='myRatingSelect' value={myRating} onChange={handleChange}>
+        <option value='1'>1</option>
+        <option value='2'>2</option>
+        <option value='3'>3</option>
+        <option value='4'>4</option>
+        <option value='5'>5</option>
+        <option value='6'>6</option>
+        <option value='7'>7</option>
+        <option value='8'>8</option>
+        <option value='9'>9</option>
+        <option value='10'>10</option>
+      </select>
       <div>
         <h4>Bar Chart</h4>
         <Bar

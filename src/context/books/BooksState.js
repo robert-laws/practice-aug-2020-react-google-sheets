@@ -1,12 +1,13 @@
 import React, { useReducer } from 'react';
 import BooksContext from './booksContext';
 import booksReducer from './booksReducer';
-import { GET_BOOKS } from '../types';
+import { GET_BOOKS, GET_BOOKS_BY_RATING } from '../types';
 import Tabletop from 'tabletop';
 
 const BooksState = ({ children }) => {
   const initialState = {
     books: [],
+    filteredBooks: [],
   };
 
   const [state, dispatch] = useReducer(booksReducer, initialState);
@@ -24,11 +25,17 @@ const BooksState = ({ children }) => {
     }
   };
 
+  const getBooksByRating = (minRating) => {
+    dispatch({ type: GET_BOOKS_BY_RATING, payload: minRating });
+  };
+
   return (
     <BooksContext.Provider
       value={{
         books: state.books,
+        filteredBooks: state.filteredBooks,
         getBooks,
+        getBooksByRating,
       }}
     >
       {children}
