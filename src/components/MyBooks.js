@@ -4,12 +4,7 @@ import { Bar } from 'react-chartjs-2';
 
 const MyBooks = () => {
   const booksContext = useContext(BooksContext);
-  const { books, filteredBooks, getBooks, getBooksByRating } = booksContext;
-
-  useEffect(() => {
-    getBooks();
-    // eslint-disable-next-line
-  }, []);
+  const { filteredBooks, getBooksByRating } = booksContext;
 
   const [labels, setLabels] = useState([]);
   const [values, setValues] = useState([]);
@@ -22,6 +17,7 @@ const MyBooks = () => {
 
   useEffect(() => {
     getBooksByRating(myRating);
+    // eslint-disable-next-line
   }, [myRating]);
 
   const processLabels = (bookData) => {
@@ -58,23 +54,18 @@ const MyBooks = () => {
     ],
   };
 
-  if (!books) {
-    return (
-      <div>
-        <h4>No Books...</h4>
-      </div>
-    );
-  }
+  console.log(filteredBooks);
 
   return (
     <div>
       <h3>Book List</h3>
       <ul>
-        {filteredBooks.map((book) => (
-          <li key={book.title}>
-            {book.title} ({book.year}) - Rating {book.rating}
-          </li>
-        ))}
+        {filteredBooks.length !== 0 &&
+          filteredBooks.map((book) => (
+            <li key={book.title}>
+              {book.title} ({book.year}) - Rating {book.rating}
+            </li>
+          ))}
       </ul>
       <hr />
       <h3>Book Ratings</h3>

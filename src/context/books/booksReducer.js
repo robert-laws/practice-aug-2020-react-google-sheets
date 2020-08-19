@@ -10,10 +10,11 @@ export default (state, action) => {
       };
 
     case GET_BOOKS_BY_RATING:
+      console.log(action.payload);
       return {
         ...state,
         filteredBooks: state.books.filter(
-          (book) => book.rating >= action.payload
+          (book) => parseInt(book.rating) >= parseInt(action.payload)
         ),
       };
 
