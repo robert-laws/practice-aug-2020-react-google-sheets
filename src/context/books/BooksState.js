@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 import BooksContext from './booksContext';
 import booksReducer from './booksReducer';
 import { GET_BOOKS, GET_BOOKS_BY_RATING } from '../types';
@@ -12,7 +12,7 @@ const BooksState = ({ children }) => {
 
   const [state, dispatch] = useReducer(booksReducer, initialState);
 
-  const getBooks = async () => {
+  const getBooks = useCallback(async () => {
     try {
       const data = await Tabletop.init({
         key: '1P0aRc6mV1edbaAlI8Il7UWXpprhh_O1vnMhZ6jKv4-w',
@@ -23,11 +23,22 @@ const BooksState = ({ children }) => {
     } catch (error) {
       console.error('Error loading spreadsheet data: ', error);
     }
-  };
+  }, [dispatch]);
 
-  const getBooksByRating = (minRating) => {
-    dispatch({ type: GET_BOOKS_BY_RATING, payload: minRating });
-  };
+  // const fetchUsername = useCallback(async () => {
+  //   const response = await fetch(
+  //     "https://jsonplaceholder.typicode.com/users/" + id
+  //   );
+  //   const user = await response.json();
+  //   dispatch({ type: "setUsername", usernameUpdated: user.name });
+  // }, [dispatch]);
+
+  const getBooksByRating = useCallback(
+    (minRating) => {
+      dispatch({ type: GET_BOOKS_BY_RATING, payload: minRating });
+    },
+    [dispatch]
+  );
 
   return (
     <BooksContext.Provider

@@ -17,8 +17,7 @@ const MyBooks = () => {
 
   useEffect(() => {
     getBooksByRating(myRating);
-    // eslint-disable-next-line
-  }, [myRating]);
+  }, [getBooksByRating, myRating]);
 
   const processLabels = (bookData) => {
     const myLabels = bookData.map((book) => {
@@ -54,7 +53,7 @@ const MyBooks = () => {
     ],
   };
 
-  console.log(filteredBooks);
+  // console.log(filteredBooks);
 
   return (
     <div>

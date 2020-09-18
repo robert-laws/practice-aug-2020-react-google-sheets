@@ -10,7 +10,6 @@ export default (state, action) => {
       };
 
     case GET_BOOKS_BY_RATING:
-      console.log(action.payload);
       return {
         ...state,
         filteredBooks: state.books.filter(

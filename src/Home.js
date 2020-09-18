@@ -8,8 +8,7 @@ const Home = () => {
 
   useEffect(() => {
     getBooks();
-    // eslint-disable-next-line
-  }, []);
+  }, [getBooks]);
 
   return (
     <div>
