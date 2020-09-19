@@ -124,10 +124,10 @@ const Questions = () => {
               title: 'Questions Count',
               chartArea: { width: '70%' },
               hAxis: {
-                title: 'Count',
+                title: 'Duration',
               },
               vAxis: {
-                title: 'Duration',
+                title: 'Count',
               },
             }}
           />
@@ -147,10 +147,10 @@ const Questions = () => {
               title: 'Questions Count',
               chartArea: { width: '70%' },
               hAxis: {
-                title: 'Count',
+                title: 'Location',
               },
               vAxis: {
-                title: 'Location',
+                title: 'Count',
               },
             }}
           />
@@ -165,7 +165,7 @@ const Questions = () => {
             height={'300px'}
             chartType='LineChart'
             loader={<div>Loading Chart</div>}
-            data={[['Question', 'Count'], ...questionsByDate]}
+            data={[['Question', 'Questions'], ...questionsByDate]}
             options={{
               title: 'Questions Count',
               chartArea: { width: '70%' },
