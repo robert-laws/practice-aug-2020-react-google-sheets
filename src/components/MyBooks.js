@@ -56,7 +56,7 @@ const MyBooks = () => {
   // console.log(filteredBooks);
 
   return (
-    <div>
+    <div style={{ padding: '0 20px' }}>
       <h3>Book List</h3>
       <ul>
         {filteredBooks.length !== 0 &&

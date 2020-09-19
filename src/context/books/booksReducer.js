@@ -1,4 +1,4 @@
-import { GET_BOOKS, GET_BOOKS_BY_RATING } from '../types';
+import { GET_BOOKS, GET_BOOKS_BY_RATING, GET_QUESTIONS } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -15,6 +15,12 @@ export default (state, action) => {
         filteredBooks: state.books.filter(
           (book) => parseInt(book.rating) >= parseInt(action.payload)
         ),
+      };
+
+    case GET_QUESTIONS:
+      return {
+        ...state,
+        questions: action.payload,
       };
 
     default:
